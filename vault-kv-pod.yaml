@@ -16,9 +16,9 @@ spec:
               name: vault-kv-config           # 이 값의 컨피그맵.
               key: username # 가져올 키.
         - name: JINSU_PASSWORD
-          valueFrom:
+          configMapKeyRef:
             secretRef:
-              name: example-secret
+              name: vault-kv-config
               key: password
       volumeMounts:
       - name: config
