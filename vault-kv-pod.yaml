@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vault-kv-pod
+spec:
+  containers:
+    - name: demo
+      image: alpine
+      command: ["sleep", "3600"]
+      env:
+        # 환경 변수 정의
+        - name: JINSU_NAME # 참고로 여기서는 컨피그맵의 키 이름과
+                                     # 대소문자가 다르다.
+          valueFrom:
+            configMapKeyRef:
+              name: vault-kv-config           # 이 값의 컨피그맵.
+              key: username # 가져올 키.
+        - name: JINSU_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: vault-kv-config
+              key: password
+      volumeMounts:
+      - name: config
+        mountPath: "/etc/config"
+        readOnly: true
+  volumes:
+    # 파드 레벨에서 볼륨을 설정한 다음, 해당 파드 내의 컨테이너에 마운트한다.
+    - name: config
+      configMap:
+        # 마운트하려는 컨피그맵의 이름을 제공한다.
+        name: vault-kv-config
+        # 컨피그맵에서 파일로 생성할 키 배열
+        items:
+        - key: "game.properties"
+          path: "game.properties"
+        - key: "vault.properties"
+          path: "vault.properties"
