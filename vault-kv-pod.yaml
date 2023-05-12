@@ -23,7 +23,7 @@ spec:
         - name: zz
           valueFrom:
             secretRef:
-              name: sample-secret
+              name: example-secret
               key: password
 
       volumeMounts:
