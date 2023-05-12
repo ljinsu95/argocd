@@ -20,11 +20,9 @@ spec:
             configMapKeyRef:
               name: vault-kv-config
               key: password
-        - name: zz
-          valueFrom:
-            secretRef:
-              name: example-secret
-              key: password
+      envFrom:
+      - secretRef:
+        name: example-secret
       volumeMounts:
       - name: config
         mountPath: "/etc/config"
