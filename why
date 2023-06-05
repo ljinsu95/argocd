@@ -1,0 +1,12 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: vault-kv-secret-version2
+  namespace: default
+  annotations:
+    avp.kubernetes.io/path: "kv2-b/data/test/myapp/config"    # vault secret path 고정
+    avp.kubernetes.io/secret-version: "2"                     # 2 is the latest revision in this example
+type: Opaque
+stringData:
+  username: <username>
+  password: <password>
