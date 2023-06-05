@@ -3,17 +3,9 @@ kind: ConfigMap
 metadata:
   name: vault-kv-config
   namespace: default
-  annotations:
-    avp.kubernetes.io/path: "secret/data/myapp/config"
 data:
-  # 속성과 비슷한 키; 각 키는 간단한 값으로 매핑됨
-  username: <username>
-  password: <password>
-
-  # 파일과 비슷한 키
-  game.properties: |
-    enemy.types=aliens,monsters
-    player.maximum-lives=5    
   vault.properties: |
-    username=<username>
-    password=<password>
+    username_A=<path:kv2-a/data/test/myapp/config#username>   
+    password_A=<path:kv2-a/data/test/myapp/config#password>
+    username_B=<path:kv2-b/data/test/myapp/config#username>   
+    password_B=<path:kv2-b/data/test/myapp/config#password>
